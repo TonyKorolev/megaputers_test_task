@@ -10,5 +10,4 @@ def test_get_employee_with_sertificate(browser):
     page = BasePage(browser, link)
     page.open()
     nameArr = page.read_name_in_staff()
-    print(nameArr)
     page.write_employee_with_sertificate(nameArr)
