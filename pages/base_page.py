@@ -23,15 +23,6 @@ class BasePage():
         except (NoSuchElementException):
             return False
         return True
-
-    # чтение ФИО сотрудников из файла "employees_name" и запись в массив
-    def read_name_in_staff(self):
-        arr = []
-        with open("employees_name.csv", "r") as file:
-            file_reader = csv.reader(file)
-            for row in file_reader:
-                arr.append(row)
-        return arr
     
     # проверка наличия поля в поисковике для ввода ФИО сотрудника
     def should_be_input_employee(self):
@@ -87,8 +78,14 @@ class BasePage():
             date_sertificate = ""
         return date_sertificate
 
-    # запись ФИО сотрудника и его сертификатов в файл "employees_name_with_sertificate.csv"
-    def write_employee_with_sertificate(self, arr):
+    # считывание ФИО сотрудников с файла "employees_name"
+    # и запись ФИО сотрудника и его сертификатов в файл "employees_name_with_sertificate.csv"
+    def write_employee_with_sertificate(self):
+        arr = []
+        with open("employees_name.csv", "r") as file:
+            file_reader = csv.reader(file)
+            for row in file_reader:
+                arr.append(row)
         csv.register_dialect("my_dialect", delimiter=",", lineterminator="\r")
         with open("employees_name_with_sertificate.csv", "w") as file:
             file_writer = csv.writer(file,"my_dialect")

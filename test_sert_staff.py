@@ -9,5 +9,4 @@ def test_get_employee_with_sertificate(browser):
     link = "https://www.megaputer.ru/produkti/sertifikat/"
     page = BasePage(browser, link)
     page.open()
-    nameArr = page.read_name_in_staff()
-    page.write_employee_with_sertificate(nameArr)
+    page.write_employee_with_sertificate()
