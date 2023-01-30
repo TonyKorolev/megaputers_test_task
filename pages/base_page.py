@@ -1,6 +1,4 @@
 from selenium.common.exceptions import NoSuchElementException
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from .locators import BasePageLocators
 import csv, time
@@ -100,8 +98,8 @@ class BasePage():
                 count_sertifiacte = BasePage.get_count_sertificate_employee(self)
                 if (count_sertifiacte != 0):
                     for j in range(count_sertifiacte):
-                        name_sertificate = BasePage.get_name_sertificate_employee(self, j+1)
-                        date_sertificate = BasePage.get_date_sertificate_employee(self, j+1)
+                        name_sertificate = " " + BasePage.get_name_sertificate_employee(self, j+1)
+                        date_sertificate = " " + BasePage.get_date_sertificate_employee(self, j+1)
                         file_writer.writerow([name_employee, name_sertificate, date_sertificate])
                 else: 
                     file_writer.writerow([name_employee, "", ""])
