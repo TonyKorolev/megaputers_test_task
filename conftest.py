@@ -2,6 +2,10 @@ import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.firefox.options import Options as OF
+from selenium.webdriver.chrome.service import Service as ServiceChrome
+from selenium.webdriver.firefox.service import Service as ServiceFirefox
+
+
 
 def pytest_addoption(parser):
     parser.addoption('--browser_name', action='store', default=None,
@@ -21,12 +25,14 @@ def browser(request):
         options = Options()
         options.add_experimental_option("prefs", {"intl.accept_languages": user_language})
         print("\nstart chrome browser for test..")
-        browser = webdriver.Chrome(options=options)
+        s = ServiceChrome("chromedriver/chromedriver.exe")
+        browser = webdriver.Chrome(service=s, options=options)
     elif browser_name == "firefox":
         of = OF()
         of.set_preference("intl.accept_languages", user_language)
         print("\nstart firefox browser for test..")
-        browser = webdriver.Firefox(options=of)
+        f = ServiceFirefox("geckodriver/geckodriver.exe")
+        browser = webdriver.Firefox(service=f, options=of)
     else:
         raise pytest.UsageError("--browser_name should be chrome or firefox")
     yield browser
