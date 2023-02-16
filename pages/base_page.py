@@ -80,12 +80,12 @@ class BasePage():
     # и запись ФИО сотрудника и его сертификатов в файл "employees_name_with_sertificate.csv"
     def write_employee_with_sertificate(self):
         arr = []
-        with open("employees_name.csv", "r") as file:
+        with open("employees_name.csv", "r", encoding="utf-8") as file:
             file_reader = csv.reader(file)
             for row in file_reader:
                 arr.append(row)
         csv.register_dialect("my_dialect", delimiter=",", lineterminator="\r")
-        with open("employees_name_with_sertificate.csv", "w") as file:
+        with open("employees_name_with_sertificate.csv", "w", encoding="utf-8") as file:
             file_writer = csv.writer(file,"my_dialect")
             for i in range(len(arr)):
                 name_employee = str(arr[i])[2:-2]
